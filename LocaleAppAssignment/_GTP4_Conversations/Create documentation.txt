@@ -1,0 +1,94 @@
+﻿I'm not using that... I reverted to the HomeController cotrolled one...
+So lets document on a readme.md
+ChatGPT
+Sure, creating a README.md for your project would be a great way to document your localization setup and any peculiarities like custom logic for handling unsupported locales in the HomeController. Here's a sample README.md that outlines your .NET 6 localization approach:
+
+markdown
+Copy code
+# .NET 6 Localization Example
+
+## Overview
+This example project demonstrates how to implement localization in a .NET 6 application, specifically focusing on ASP.NET Core MVC.
+
+## Setup
+
+### Project Structure
+- `Program.cs`: Bootstraps the application.
+- `HomeController.cs`: Handles the main logic for the MVC application.
+- `locales/`: Contains `.resx` resource files for each supported locale (`en`, `fr`, `uk-UA`).
+
+### Setting up Localization
+Localization is primarily managed within the `HomeController` where we use `IStringLocalizer<HomeController>` to get localized strings. The `.resx` files in the `locales` folder contain the localized strings.
+
+```csharp
+// HomeController.cs
+public class HomeController : Controller
+{
+    private readonly IStringLocalizer<HomeController> _localizer;
+
+    public HomeController(IStringLocalizer<HomeController> localizer)
+    {
+        _localizer = localizer;
+    }
+
+    public IActionResult Index()
+    {
+        ViewData["Message"] = _localizer["Hello"];
+        // Additional logic for populating ViewData for Date/Time, Number, and Units
+        return View();
+    }
+}
+Handling Unsupported Locales
+If a locale is not supported (e.g., "UA" instead of "uk-UA"), the HomeController contains custom logic to handle it. It falls back to a default locale (e.g., "en").
+
+Localization Resource Files
+The .resx files in the locales folder should be named according to the following pattern for the localization to work:
+
+css
+Copy code
+Controllers.HomeController.[culture-code].resx
+Note on Character Sets
+If you encounter character set issues with uk-UA or any other locales, please ensure that your text editor and your .resx files are set to use UTF-8 encoding.
+
+Running the Application
+Navigate to different localized versions of the application by changing the URL to include the locale code (e.g., /en, /fr, /uk-UA).
+
+Debugging
+If you face issues like not picking up the correct locale, ensure that the .resx file naming convention is correct and that the character encoding for .resx files is set to UTF-8.
+
+vbnet
+Copy code
+
+Feel free to modify this README to better match your project's specific requirements and constraints.
+
+
+
+User
+o	Update Readme.md with 
+	Application description: 2 paragraphs, 4-10 Sentences.
+	Information on how to run developed application locally.
+	At least 2 example urls how to change locale.
+
+that's the documentation criteria
+create only the readme.md
+
+And dont include code details
+ChatGPT
+Certainly, below is a README.md file that adheres to your specified documentation criteria:
+
+README.md for Localization Example in .NET 6 MVC Application
+Application Description
+This application serves as an example of implementing localization within a .NET 6 ASP.NET Core MVC framework. Designed as a modular and scalable template, it aims to provide a foundation for developing multi-lingual web applications. Out of the box, it supports English, French, and Ukrainian languages and comes with built-in utilities for formatting numbers, date/time, and units of measurement according to local standards.
+
+The primary focus of the project is to demonstrate best practices in software internationalization (i18n) and localization (l10n). Features include URL-based locale switching and robust fallback mechanisms for missing translations or unsupported locales. This example serves as a practical guide for developers looking to extend their applications' reach across different markets and user bases.
+
+How to Run Locally
+Clone the repository to your local machine.
+Navigate to the project directory in your terminal.
+Run dotnet restore to install all the necessary packages.
+Execute dotnet run to start the application.
+Open your web browser and go to http://localhost:5000/.
+Example URLs for Changing Locale
+To view the application in English: http://localhost:5000/en
+To view the application in French: http://localhost:5000/fr
+Feel free to modify or expand upon this README to better suit your project's needs.
