@@ -10,4 +10,16 @@
     <Folder Include="_GTP4_Conversations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Locales\Controllers.HomeController.uk-UA.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Locales\Controllers.HomeController.en.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Locales\Controllers.HomeController.fr.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

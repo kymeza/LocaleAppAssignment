@@ -3,6 +3,31 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>@ViewData["Message"]</h1>
+
+    <div>
+        <h3>Date/Time Formatting</h3>
+        <p>@ViewData["DateLongFormat"]: @ViewData["DateLong"]</p>
+        <p>@ViewData["DateShortFormat"]: @ViewData["DateShort"]</p>
+        <p>@ViewData["TimeLongFormat"]: @ViewData["TimeLong"]</p>
+        <p>@ViewData["TimeShortFormat"]: @ViewData["TimeShort"]</p>
+    </div>
+
+    <div>
+        <h3>Number Formatting</h3>
+        <p>First Number: @ViewData["Number1"]</p>
+        <p>Second Number: @ViewData["Number2"]</p>
+        <p>Third Number: @ViewData["Number3"]</p>
+        <p>Fourth Number: @ViewData["Number4"]</p>
+    </div>
+
+    <div>
+        <h3>Units of Measurement</h3>
+        <p>Inches: @ViewData["Inches"]</p>
+        <p>Centimeters: @ViewData["Centimeters"]</p>
+        <p>Pounds: @ViewData["Pounds"]</p>
+        <p>Kilograms: @ViewData["Kilograms"]</p>
+        <p>Liters: @ViewData["Liters"]</p>
+        <p>Ounces: @ViewData["Oz"]</p>
+    </div>
 </div>

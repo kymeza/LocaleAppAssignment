@@ -1,9 +1,14 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization(options => options.ResourcesPath = "Locales");
+
+builder.Services.AddMvc()
+    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+    .AddDataAnnotationsLocalization();
 
 builder.Services.AddControllersWithViews()
     .AddViewLocalization();
@@ -17,19 +22,27 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
-app.UseStaticFiles();
+app.UseHttpsRedirection();
 
 app.UseRouting();
 
+app.UseStaticFiles();
 app.UseAuthorization();
 
-app.UseHttpsRedirection();
-
-
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{culture=uk-UA}/{controller=Home}/{action=Index}/{id?}");
+
+
+app.Use((context, next) =>
+{
+    context.Response.Headers["Content-Type"] = "text/html; charset=utf-8";
+    return next.Invoke();
+});
 
 app.Run();
